@@ -48,6 +48,15 @@ function ccleaner_install {
         hdiutil unmount "/Volumes/CCleaner/";
 }
 
+function callingcard_install {
+    echo "[InternetShortcut]" > remotefix.url
+    echo "URL=https://www.elkjop.no/cms/20140218_092724/remotefix/" >> remotefix.url
+    echo "IconIndex=0" >> remotefix.url
+    echo "IconIndex=0" >> remotefix.url
+    echo "Writing to desktop"
+    cp remotefix.url "$HOME/Desktop/Elkjøp Remote Fix.url"
+}
+
 function kg {
     libreoffice_install
     chrome_install
@@ -56,8 +65,10 @@ function kg {
 
 function sa {
     kg
+    callingcard_install
     cloud_install
 }
+
 
 clear
 #echo "Current temp:$TMPDIR"
@@ -71,6 +82,7 @@ echo "--------------------"
 echo "Individual Applications"
 echo "Latest Versions"
 echo "--------------------"
+echo "0. RemoteFix Install"
 echo "1. Cloudinstall"
 echo "2. Liber Office"
 echo "3. Google Chrome"
@@ -85,6 +97,9 @@ echo "--------------------"
 printf "What do you wan't todo?  -> "
 read OPTION
 echo "You Chose Opition $OPTION"
+if [ $OPTION -eq 0 ]; then
+    callingcard_install
+fi;
 if [ $OPTION -eq 1 ]; then
     cloud_install;
 fi;

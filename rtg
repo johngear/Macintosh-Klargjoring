@@ -1,0 +1,105 @@
+#!/bin/sh
+function cloud_install {
+	echo "Downloading cloud";
+	curl -O https://cloud.elkjop.no/update/elkjop/release/elkjop.dmg;
+	echo "Mounting";
+	hdiutil mount elkjop.dmg;
+	echo "Installing";
+	cp -R "/Volumes/Elkjøp Cloud/Jotta.app" /Applications;
+	echo "Unmounting";
+	hdiutil unmount "/Volumes/Elkjøp Cloud/";	
+}
+function libreoffice_install {
+        echo "Downloading LibreOffice";
+	LOVERSION=$(curl -s 'http://download.documentfoundation.org/libreoffice/stable/' | grep -o '<a .*href=.*>' | sed -e 's/<a /\<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d' | egrep -o "([0-9]{1,}\.)+[0-9]{1,}" | sort -t. -k 1,1nr -k 2,2nr -k 3,3nr | sed -n '1p')
+        echo $LOVERSION;
+	#echo https://mirrors.dotsrc.org/tdf/libreoffice/stable/$LOVERSION/mac/x86_64/LibreOffice_"$LOVERSION"_MacOS_x86-64.dmg;
+	curl -O https://mirrors.dotsrc.org/tdf/libreoffice/stable/$LOVERSION/mac/x86_64/LibreOffice_"$LOVERSION"_MacOS_x86-64.dmg;
+        ls;
+	echo "Mounting";
+	hdiutil mount LibreOffice_"$LOVERSION"_MacOS_x86-64.dmg;
+	echo "Installing";
+	cp -R "/Volumes/LibreOffice/LibreOffice.app" /Applications;
+	echo "Unmounting";
+        hdiutil unmount "/Volumes/LibreOffice/";
+}
+function chrome_install {
+        echo "Downloading Google Chrome";
+        curl -O https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg;
+        ls;
+        echo "Mounting";
+        hdiutil mount googlechrome.dmg;
+        echo "Installing";
+        cp -R "/Volumes/Google Chrome/Google Chrome.app" /Applications;
+        echo "Unmounting";
+        hdiutil unmount "/Volumes/Google Chrome/";
+}
+function ccleaner_install {
+        echo "Downloading CCleaner";
+	LOCCLEANER=$(curl -s 'https://www.piriform.com/ccleaner/download?upgrade' | grep -o '<a .*href=.*>' | sed -e 's/<a /\<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d' | grep "CCMacSetup" | sed -n '1p'| sed -e 's/^/https:/');
+        echo $LOCCLEANER;
+	curl -O $LOCCLEANER;
+	FILE=$(ls | grep "CCMacSetup");
+        echo "Mounting";
+        hdiutil mount $FILE;
+        echo "Installing";
+        cp -R "/Volumes/CCleaner/CCleaner.app" /Applications;
+        echo "Unmounting";
+        hdiutil unmount "/Volumes/CCleaner/";
+}
+
+function kg {
+    libreoffice_install
+    chrome_install
+    ccleaner_install
+}
+
+function sa {
+    kg
+    cloud_install
+}
+
+clear
+#echo "Current temp:$TMPDIR"
+cd $TMPDIR
+rm -Rf RTG
+mkdir RTG
+cd RTG
+echo "Macintosh Klargjøring"
+echo "Ole Sivert Aarhaug 2017"
+echo "--------------------"
+echo "Individual Applications"
+echo "Latest Versions"
+echo "--------------------"
+echo "1. Cloudinstall"
+echo "2. Liber Office"
+echo "3. Google Chrome"
+echo "4. Ccleaner"
+echo "--------------------"
+echo "--------------------"
+echo "Complete install"
+echo "--------------------"
+echo "11. KG: Installerer Liber Office, Chrome og CCleaner"
+echo "22. SA: Kjører KG med Cloud og Remote"
+echo "--------------------"
+printf "What do you wan't todo?  -> "
+read OPTION
+echo "You Chose Opition $OPTION"
+if [ $OPTION -eq 1 ]; then
+    cloud_install;
+fi;
+if [ $OPTION -eq 2 ]; then
+    libreoffice_install;
+fi;
+if [ $OPTION -eq 3 ]; then
+    chrome_install;
+fi;
+if [ $OPTION -eq 4 ]; then
+    ccleaner_install;
+fi;
+if [ $OPTION -eq 11 ]; then
+    kg;
+fi;
+if [ $OPTION -eq 22 ]; then
+    sa;
+fi;

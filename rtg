@@ -68,6 +68,13 @@ function sa {
     callingcard_install
     cloud_install
 }
+function softupdate {
+	echo "--------------------------------------------"
+	echo "Searching and installing recommended updates"
+	echo "--------------------------------------------"
+	sudo softwareupdate -ir
+
+}
 
 
 clear
@@ -87,6 +94,7 @@ echo "1. Cloudinstall"
 echo "2. Liber Office"
 echo "3. Google Chrome"
 echo "4. Ccleaner"
+echo "5. (SUDO) Install recommended updates"
 echo "--------------------"
 echo "--------------------"
 echo "Complete install"
@@ -111,6 +119,9 @@ if [ $OPTION -eq 3 ]; then
 fi;
 if [ $OPTION -eq 4 ]; then
     ccleaner_install;
+fi;
+if [ $OPTION -eq 5 ]; then
+    softupdate;
 fi;
 if [ $OPTION -eq 11 ]; then
     kg;

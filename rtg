@@ -61,6 +61,7 @@ function kg {
     libreoffice_install
     chrome_install
     ccleaner_install
+	softupdate
 }
 
 function sa {
@@ -99,7 +100,7 @@ echo "--------------------"
 echo "--------------------"
 echo "Complete install"
 echo "--------------------"
-echo "11. KG: Installerer Liber Office, Chrome og CCleaner"
+echo "11. KG: Installerer Liber Office, Chrome og CCleaner Installerer også anbefalte oppdateringer"
 echo "22. SA: Kjører KG med Cloud og Remote"
 echo "--------------------"
 printf "What do you wan't todo?  -> "

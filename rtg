@@ -36,7 +36,7 @@ function chrome_install {
 }
 function ccleaner_install {
         echo "Downloading CCleaner";
-	LOCCLEANER=$(curl -s 'https://www.piriform.com/ccleaner/download?upgrade' | grep -o '<a .*href=.*>' | sed -e 's/<a /\<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d' | grep "CCMacSetup" | sed -n '1p'| sed -e 's/^/https:/');
+	LOCCLEANER=$(curl -s 'https://www.ccleaner.com/ccleaner/download?upgrade' | grep -o '<a .*href=.*>' | sed -e 's/<a /\<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d' | grep "CCMacSetup" | sed -n '1p'| sed -e 's/^/https:/');
         echo $LOCCLEANER;
 	curl -O $LOCCLEANER;
 	FILE=$(ls | grep "CCMacSetup");
@@ -58,10 +58,11 @@ function callingcard_install {
 }
 
 function kg {
+    sudo echo ""
     libreoffice_install
     chrome_install
     ccleaner_install
-	softupdate
+    softupdate
 }
 
 function sa {

@@ -1,2 +1,2 @@
 # Macintosh-Klargjoring
-A simple Bash application which install basic software
+A simple Bash script which install basic software for a new mac

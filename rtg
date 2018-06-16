@@ -89,7 +89,7 @@ cd RTG
 echo "Macintosh Klargjøring"
 echo "Ole Sivert Aarhaug 2017"
 echo "--------------------"
-if [ "$LOCALVERSION" == "$EXTERNALVERSION" ]; then
+if [ "$LOCALVERSION" = "$EXTERNALVERSION" ]; then
     echo "You are running the latest version!"
 else
     echo "NOT LATEST VERSION!"

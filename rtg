@@ -88,14 +88,14 @@ mkdir RTG
 cd RTG
 echo "Macintosh Klargjøring"
 echo "Ole Sivert Aarhaug 2017"
-echo "--------------------"
-if [ "$LOCALVERSION" = "$EXTERNALVERSION" ]; then
-    echo "You are running the latest version!"
-else
-    echo "NOT LATEST VERSION!"
-    echo "Download new versions of Macintosh Klargjøring at:"
-    echo "https://github.com/stemnic/Macintosh-Klargjoring"
-fi;
+#echo "--------------------"
+#if [ "$LOCALVERSION" = "$EXTERNALVERSION" ]; then
+#    echo "You are running the latest version!"
+#else
+#    echo "NOT LATEST VERSION!"
+#    echo "Download new versions of Macintosh Klargjøring at:"
+#    echo "https://github.com/stemnic/Macintosh-Klargjoring"
+#fi;
 echo "--------------------"
 echo "Individual Applications"
 echo "Latest Versions"
